@@ -18,7 +18,7 @@ auto AppendPopup::setup(TextInput* targetInput, bool floatFilter) -> bool {
     this->m_closeBtn->setEnabled(false);
 
     auto titleRow = PopupFunctions::createTitleRow("Append Count");
-    auto appendRow = PopupFunctions::createInputRow("Append:", this->appendInput, 100.f, "0", floatFilter);
+    auto appendRow = PopupFunctions::createInputRow("Append:", this->appendInput, 100.f, "", floatFilter);
     auto buttonRow = PopupFunctions::createButtonRow(this, "Cancel", "Append", menu_selector(AppendPopup::cancel), menu_selector(AppendPopup::ok));
 
     auto col = CCNode::create();
