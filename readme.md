@@ -1,10 +1,10 @@
 # Attempt Count
 
-Edit current or total level attempt counts in the game geometry dash. You can also edit the jumps and time.
+Edit the current or total level attempt counts in the game geometry dash. You can also edit the jumps and time.
 
 There is no undo button! I'm not responsible for losing attempts.
 
-<img src="image.png" height="500">
+<img src="https://github.com/Moebits/Attempt-Count/blob/main/image.png?raw=true" height="500">
 
 ### Advanced Note
 
@@ -13,9 +13,16 @@ Because I couldn't figure out what corresponds to the time label, this mod actua
 ### Installation
 
 1. Install [Geode](https://geode-sdk.org/).
-2. Place the `.geode` file from releases in the geode/mods folder located where you installed Geometry Dash.
+2. Place the `.geode` file from [releases](https://github.com/Moebits/Attempt-Count/releases) in the geode/mods folder located where you installed Geometry Dash.
 
-### Compiling
+### Building
 
-1. Install [Geode CLI](https://docs.geode-sdk.org/getting-started/geode-cli) and then the sdk.
-2. Run `geode build`. It is automatically installed to Geometry Dash if set up correctly.
+Install [Geode CLI](https://docs.geode-sdk.org/getting-started/geode-cli) and the sdk.
+
+Release build - Run `geode build`. It is automatically installed to Geometry Dash if set up correctly.
+
+Debug build - I run with the debugger in VSCode. You may have to edit the launch.json with the path to Geometry Dash on your device.
+
+### Credits
+
+- [Geode](https://geode-sdk.org/)

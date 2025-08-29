@@ -17,7 +17,8 @@
 	},
 	"resources": {
         "sprites": [
-            "logo.png"
+            "logo.png",
+            "image.png"
         ]
     },
 	"settings": {
