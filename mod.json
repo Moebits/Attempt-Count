@@ -1,0 +1,40 @@
+{
+	"geode": "4.7.0",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "moebits.attempt_count",
+	"name": "Attempt Count",
+	"version": "v0.0.1",
+	"developer": "Moebits",
+	"description": "Edit level attempt counts",
+	"tags": ["offline", "customization"],
+	"links": {
+		"source": "https://github.com/Moebits/Attempt-Count"
+	},
+	"resources": {
+        "sprites": [
+            "logo.png"
+        ]
+    },
+	"settings": {
+		"level-stats-enabled": {
+			"type": "bool",
+			"name": "Enable Level Stats",
+			"default": true
+		},
+		"pause-menu-enabled": {
+			"type": "bool",
+			"name": "Enable Pause Menu",
+			"default": true
+		},
+		"right-pause-menu": {
+			"type": "bool",
+			"name": "Right Pause Menu",
+			"default": false
+		}
+	}
+}
