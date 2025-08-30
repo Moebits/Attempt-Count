@@ -11,7 +11,7 @@ auto SharedStatsPanel::addButton(FLAlertLayer* alert, GJGameLevel* level) -> voi
         // @geode-ignore(unknown-resource)
         auto* buttonSprite = CCSprite::create("logo.png"_spr);
 
-        buttonSprite->setScale(0.35f);
+        buttonSprite->setScale(0.65f);
 
         auto* button = CCMenuItemSpriteExtra::create(
             buttonSprite, alert, menu_selector(SharedStatsPanel::buttonPress)

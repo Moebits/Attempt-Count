@@ -13,7 +13,7 @@ auto ModifyPauseLayer::customSetup() -> void {
 	// @geode-ignore(unknown-resource)
 	auto* buttonSprite = CCSprite::create("logo.png"_spr);
 
-	buttonSprite->setScale(0.3f);
+	buttonSprite->setScale(0.5f);
 
 	auto* button = CCMenuItemSpriteExtra::create(
 		buttonSprite, this, menu_selector(ModifyPauseLayer::buttonPress)
