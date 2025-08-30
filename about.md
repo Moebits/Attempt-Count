@@ -4,7 +4,7 @@ Edit the current or total level attempt counts in the game geometry dash. You ca
 
 There is no undo button! I'm not responsible for losing attempts.
 
-![image](moebits.attempt_count/image.png)
+![image](moebits.attempt-count/image.png)
 
 ### Advanced Note
 

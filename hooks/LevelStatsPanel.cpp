@@ -11,11 +11,7 @@ auto SharedStatsPanel::addButton(FLAlertLayer* alert, GJGameLevel* level) -> voi
         // @geode-ignore(unknown-resource)
         auto* buttonSprite = CCSprite::create("logo.png"_spr);
 
-        #if defined(GEODE_DESKTOP)
-            buttonSprite->setScale(0.35f);
-        #elif defined(GEODE_MOBILE)
-            buttonSprite->setScale(0.1f);
-        #endif
+        buttonSprite->setScale(0.35f);
 
         auto* button = CCMenuItemSpriteExtra::create(
             buttonSprite, alert, menu_selector(SharedStatsPanel::buttonPress)
@@ -30,7 +26,15 @@ auto SharedStatsPanel::addButton(FLAlertLayer* alert, GJGameLevel* level) -> voi
                 ->setCrossAxisAlignment(AxisAlignment::Center));
         }
 
-        menu->addChild(button);
+        bool leftMenu = Mod::get()->getSettingValue<bool>("left-stats-menu");
+
+        if (leftMenu) {
+            auto* existingButton = menu->getChildByIDRecursive("button-1");
+            menu->insertBefore(button, existingButton);
+        } else {
+            menu->addChild(button);
+        }
+
         menu->updateLayout();
     }
 }

@@ -36,6 +36,11 @@
 			"type": "bool",
 			"name": "Right Pause Menu",
 			"default": false
+		},
+		"left-stats-menu": {
+			"type": "bool",
+			"name": "Left Stats Menu",
+			"default": false
 		}
 	}
 }
