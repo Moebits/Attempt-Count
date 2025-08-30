@@ -1,12 +1,12 @@
 #include "PopupFunctions.h"
 
 auto PopupFunctions::createTitleRow(const gd::string& text, float scale, const char* font) -> CCNode* {
-    auto row = CCNode::create();
+    auto* row = CCNode::create();
     row->setLayout(AxisLayout::create(Axis::Row)
         ->setAxisAlignment(AxisAlignment::Center)
         ->setCrossAxisAlignment(AxisAlignment::Center));
 
-    auto label = CCLabelBMFont::create(text.c_str(), font);
+        auto* label = CCLabelBMFont::create(text.c_str(), font);
     label->setScale(scale);
     label->setAnchorPoint({0.5f, 0.5f});
     row->addChild(label);
@@ -19,13 +19,13 @@ auto PopupFunctions::createTitleRow(const gd::string& text, float scale, const c
 
 auto PopupFunctions::createInputRow(const char* text, TextInput*& input, float width, const std::string& value, 
     bool floatFilter) -> CCNode* {
-    auto row = CCNode::create();
+    auto* row = CCNode::create();
     row->setLayout(AxisLayout::create(Axis::Row)
         ->setGap(10.f)
         ->setAxisAlignment(AxisAlignment::Center)
         ->setCrossAxisAlignment(AxisAlignment::Center));
 
-    auto label = CCLabelBMFont::create(text, "goldFont.fnt");
+    auto* label = CCLabelBMFont::create(text, "goldFont.fnt");
     label->setScale(0.8f);
     label->setAnchorPoint({0.f, 0.5f});
     row->addChild(label);
@@ -45,13 +45,13 @@ auto PopupFunctions::createInputRow(const char* text, TextInput*& input, float w
 
 auto PopupFunctions::createInputRowPlus(const char* text, TextInput*& input, float width, const gd::string& value, 
     CCObject* target, SEL_MenuHandler plusFunc, bool floatFilter) -> CCNode* {
-    auto row = CCNode::create();
+    auto* row = CCNode::create();
     row->setLayout(AxisLayout::create(Axis::Row)
         ->setGap(10.f)
         ->setAxisAlignment(AxisAlignment::Center)
         ->setCrossAxisAlignment(AxisAlignment::Center));
 
-    auto label = CCLabelBMFont::create(text, "goldFont.fnt");
+    auto* label = CCLabelBMFont::create(text, "goldFont.fnt");
     label->setScale(0.8f);
     label->setAnchorPoint({0.f, 0.5f});
     row->addChild(label);
@@ -62,10 +62,10 @@ auto PopupFunctions::createInputRowPlus(const char* text, TextInput*& input, flo
     input->setAnchorPoint({0.f, 0.5f});
     row->addChild(input);
 
-    auto plusButton = CCMenuItemSpriteExtra::create(ButtonSprite::create("+"), target, plusFunc);
+    auto* plusButton = CCMenuItemSpriteExtra::create(ButtonSprite::create("+"), target, plusFunc);
     plusButton->setUserObject(new PlusButtonParameters(input, floatFilter));
 
-    auto menu = CCMenu::create();
+    auto* menu = CCMenu::create();
     menu->setLayout(AxisLayout::create(Axis::Row)
         ->setAxisAlignment(AxisAlignment::Center)
         ->setCrossAxisAlignment(AxisAlignment::Center));
@@ -83,14 +83,14 @@ auto PopupFunctions::createInputRowPlus(const char* text, TextInput*& input, flo
 
 auto PopupFunctions::createButtonRow(CCObject* target, const char* cancelLabel, const char* okLabel, 
     SEL_MenuHandler cancelFunc, SEL_MenuHandler okFunc, float padding) -> CCNode* {
-    auto row = CCMenu::create();
+    auto* row = CCMenu::create();
     row->setLayout(AxisLayout::create(Axis::Row)
         ->setGap(padding)
         ->setAxisAlignment(AxisAlignment::Center)
         ->setCrossAxisAlignment(AxisAlignment::Center));
 
-    auto leftButton  = CCMenuItemSpriteExtra::create(ButtonSprite::create(cancelLabel), target, cancelFunc);
-    auto rightButton = CCMenuItemSpriteExtra::create(ButtonSprite::create(okLabel), target, okFunc);
+    auto* leftButton  = CCMenuItemSpriteExtra::create(ButtonSprite::create(cancelLabel), target, cancelFunc);
+    auto* rightButton = CCMenuItemSpriteExtra::create(ButtonSprite::create(okLabel), target, okFunc);
 
     row->addChild(leftButton);
     row->addChild(rightButton);

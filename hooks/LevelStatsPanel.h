@@ -26,15 +26,18 @@ static auto statsPanel = SharedStatsPanel{};
 
 class $modify(ModifyEditLevelLayer, EditLevelLayer) {
 public:
+    static auto onModify(auto& self) -> void;
     auto onLevelInfo(CCObject* sender) -> void;
 };
 
 class $modify(ModifyLevelInfoLayer, LevelInfoLayer) {
 public:
+    static auto onModify(auto& self) -> void;
     auto onLevelInfo(CCObject* sender) -> void;
 };
 
 class $modify(ModifyLevelSelectLayer, LevelSelectLayer) {
 public:
+    static auto onModify(auto& self) -> void;
     auto onInfo(CCObject* sender) -> void;
 };

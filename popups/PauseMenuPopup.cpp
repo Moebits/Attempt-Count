@@ -5,7 +5,7 @@
 #include "Functions.h"
 
 auto PauseMenuPopup::create() -> PauseMenuPopup* {
-    auto ret = new PauseMenuPopup();
+    auto* ret = new PauseMenuPopup();
     if (ret->initAnchored(popupSize.width, popupSize.height)) {
         ret->autorelease();
         return ret;
@@ -15,7 +15,7 @@ auto PauseMenuPopup::create() -> PauseMenuPopup* {
 }
 
 auto PauseMenuPopup::setup() -> bool {
-    auto playLayer = static_cast<ModifyPlayLayer*>(PlayLayer::get());
+    auto* playLayer = static_cast<ModifyPlayLayer*>(PlayLayer::get());
     if (!playLayer) return false;
     int attempts = playLayer->m_attempts;
     int jumps = playLayer->m_jumps;
@@ -24,13 +24,13 @@ auto PauseMenuPopup::setup() -> bool {
     this->m_closeBtn->setVisible(false);
     this->m_closeBtn->setEnabled(false);
 
-    auto titleRow = PopupFunctions::createTitleRow("Edit Attempt Count");
-    auto attemptsRow = PopupFunctions::createInputRowPlus("Attempt:", this->attemptInput, 100.f, fmt::format("{}", attempts), this, menu_selector(PauseMenuPopup::plusMenu));
-    auto jumpsRow = PopupFunctions::createInputRowPlus("Jumps:", this->jumpInput, 100.f, fmt::format("{}", jumps), this, menu_selector(PauseMenuPopup::plusMenu));
-    auto timeRow = PopupFunctions::createInputRowPlus("Time:", this->timeInput, 100.f, fmt::format("{}", static_cast<int>(time)), this, menu_selector(PauseMenuPopup::plusMenu), true);
-    auto buttonRow = PopupFunctions::createButtonRow(this, "Cancel", "Edit", menu_selector(PauseMenuPopup::cancel), menu_selector(PauseMenuPopup::ok));
+    auto* titleRow = PopupFunctions::createTitleRow("Edit Attempt Count");
+    auto* attemptsRow = PopupFunctions::createInputRowPlus("Attempt:", this->attemptInput, 100.f, fmt::format("{}", attempts), this, menu_selector(PauseMenuPopup::plusMenu));
+    auto* jumpsRow = PopupFunctions::createInputRowPlus("Jumps:", this->jumpInput, 100.f, fmt::format("{}", jumps), this, menu_selector(PauseMenuPopup::plusMenu));
+    auto* timeRow = PopupFunctions::createInputRowPlus("Time:", this->timeInput, 100.f, fmt::format("{}", static_cast<int>(time)), this, menu_selector(PauseMenuPopup::plusMenu), true);
+    auto* buttonRow = PopupFunctions::createButtonRow(this, "Cancel", "Edit", menu_selector(PauseMenuPopup::cancel), menu_selector(PauseMenuPopup::ok));
     
-    auto col = CCNode::create();
+    auto* col = CCNode::create();
     col->setLayout(AxisLayout::create(Axis::Column)
         ->setGap(25.f)
         ->setAxisAlignment(AxisAlignment::Center)
@@ -58,7 +58,7 @@ auto PauseMenuPopup::ok(CCObject* sender) -> void {
     auto newTime  = numFromString<double>(this->timeInput->getString());
 
     if (newAttempts && newJumps && newTime) {
-        auto playLayer = static_cast<ModifyPlayLayer*>(PlayLayer::get());
+        auto* playLayer = static_cast<ModifyPlayLayer*>(PlayLayer::get());
         if (playLayer) {
             int oldAttempts = playLayer->m_attempts;
             int oldJumps = playLayer->m_jumps;
@@ -86,9 +86,9 @@ auto PauseMenuPopup::ok(CCObject* sender) -> void {
             }
 
             if (playLayer->m_isPlatformer) {
-                auto pauseLayer = typeinfo_cast<PauseLayer*>(CCDirector::get()->getRunningScene()->getChildByID("PauseLayer"));
+                auto* pauseLayer = typeinfo_cast<PauseLayer*>(CCDirector::get()->getRunningScene()->getChildByID("PauseLayer"));
                 if (pauseLayer) {
-                    auto playTimeLabel = static_cast<CCLabelBMFont*>(pauseLayer->getChildByIDRecursive("play-time"));
+                    auto* playTimeLabel = static_cast<CCLabelBMFont*>(pauseLayer->getChildByIDRecursive("play-time"));
                     playTimeLabel->setString(Functions::formatSeconds(playLayer->m_timePlayed).c_str());
                 }
             }
@@ -102,7 +102,7 @@ auto PauseMenuPopup::cancel(CCObject* sender) -> void {
 }
 
 auto PauseMenuPopup::plusMenu(CCObject* sender) -> void {
-    auto button = static_cast<CCMenuItemSpriteExtra*>(sender);
-    auto params = static_cast<PlusButtonParameters*>(button->getUserObject());
+    auto* button = static_cast<CCMenuItemSpriteExtra*>(sender);
+    auto* params = static_cast<PlusButtonParameters*>(button->getUserObject());
     AppendPopup::create(params->input, params->floatFilter)->show();
 }

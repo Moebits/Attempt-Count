@@ -13,9 +13,9 @@ auto ModifyPlayLayer::postUpdate(float dt) -> void {
 }
 
 auto ModifyPlayLayer::updateEndTime(float dt) -> void {
-    auto endLayer = typeinfo_cast<EndLevelLayer*>(this->getChildByIDRecursive("EndLevelLayer"));
+    auto* endLayer = typeinfo_cast<EndLevelLayer*>(this->getChildByIDRecursive("EndLevelLayer"));
     if (endLayer) {
-        auto timeLabel = static_cast<CCLabelBMFont*>(endLayer->getChildByIDRecursive("time-label"));
+        auto* timeLabel = static_cast<CCLabelBMFont*>(endLayer->getChildByIDRecursive("time-label"));
         timeLabel->setString(fmt::format("Time: {}", Functions::formatTime(this->m_fields->levelTime)).c_str());
         this->unschedule(schedule_selector(ModifyPlayLayer::updateEndTime));
     }

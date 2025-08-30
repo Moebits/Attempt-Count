@@ -3,7 +3,7 @@
 #include "AppendPopup.h"
 
 auto LevelStatsPopup::create(GJGameLevel* level, FLAlertLayer* alert) -> LevelStatsPopup* {
-    auto ret = new LevelStatsPopup();
+    auto* ret = new LevelStatsPopup();
     if (ret->initAnchored(popupSize.width, popupSize.height, level, alert)) {
         ret->autorelease();
         return ret;
@@ -21,12 +21,12 @@ auto LevelStatsPopup::setup(GJGameLevel* level, FLAlertLayer* alert) -> bool {
     this->m_closeBtn->setVisible(false);
     this->m_closeBtn->setEnabled(false);
 
-    auto titleRow = PopupFunctions::createTitleRow("Edit Attempt Count");
-    auto attemptsRow = PopupFunctions::createInputRowPlus("Attempts:", this->attemptsInput, 100.f, fmt::format("{}", attempts), this, menu_selector(LevelStatsPopup::plusMenu));
-    auto jumpsRow = PopupFunctions::createInputRowPlus("Jumps:", this->jumpsInput, 100.f, fmt::format("{}", jumps), this, menu_selector(LevelStatsPopup::plusMenu));
-    auto buttonRow = PopupFunctions::createButtonRow(this,"Cancel", "Edit", menu_selector(LevelStatsPopup::cancel), menu_selector(LevelStatsPopup::ok));
+    auto* titleRow = PopupFunctions::createTitleRow("Edit Attempt Count");
+    auto* attemptsRow = PopupFunctions::createInputRowPlus("Attempts:", this->attemptsInput, 100.f, fmt::format("{}", attempts), this, menu_selector(LevelStatsPopup::plusMenu));
+    auto* jumpsRow = PopupFunctions::createInputRowPlus("Jumps:", this->jumpsInput, 100.f, fmt::format("{}", jumps), this, menu_selector(LevelStatsPopup::plusMenu));
+    auto* buttonRow = PopupFunctions::createButtonRow(this,"Cancel", "Edit", menu_selector(LevelStatsPopup::cancel), menu_selector(LevelStatsPopup::ok));
     
-    auto col = CCNode::create();
+    auto* col = CCNode::create();
     col->setLayout(AxisLayout::create(Axis::Column)
         ->setGap(25.f)
         ->setAxisAlignment(AxisAlignment::Center)
@@ -63,11 +63,11 @@ auto LevelStatsPopup::ok(CCObject* sender) -> void {
         int newTotalJumps = this->level->m_jumps + jumpDiff;
         this->level->m_jumps = newTotalJumps;
 
-        auto textArea = static_cast<TextArea*>(this->alert->getChildByIDRecursive("content-text-area"));
-        auto lines = textArea->m_label->m_lines;
+        auto* textArea = static_cast<TextArea*>(this->alert->getChildByIDRecursive("content-text-area"));
+        auto* lines = textArea->m_label->m_lines;
 
         for (size_t i = 0; i < lines->count(); i++) {
-            auto label = static_cast<CCLabelBMFont*>(lines->objectAtIndex(i));
+            auto* label = static_cast<CCLabelBMFont*>(lines->objectAtIndex(i));
             auto str = static_cast<gd::string>(label->getString());
 
             if (str.find("Total Attempts") != gd::string::npos) {
@@ -85,7 +85,7 @@ auto LevelStatsPopup::cancel(CCObject* sender) -> void {
 }
 
 auto LevelStatsPopup::plusMenu(CCObject* sender) -> void {
-    auto button = static_cast<CCMenuItemSpriteExtra*>(sender);
-    auto params = static_cast<PlusButtonParameters*>(button->getUserObject());
+    auto* button = static_cast<CCMenuItemSpriteExtra*>(sender);
+    auto* params = static_cast<PlusButtonParameters*>(button->getUserObject());
     AppendPopup::create(params->input, params->floatFilter)->show();
 }

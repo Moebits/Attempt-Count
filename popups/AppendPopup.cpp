@@ -2,7 +2,7 @@
 #include "PopupFunctions.h"
 
 auto AppendPopup::create(TextInput* targetInput, bool floatFilter) -> AppendPopup* {
-    auto ret = new AppendPopup();
+    auto* ret = new AppendPopup();
     if (ret->initAnchored(popupSize.width, popupSize.height, targetInput, floatFilter)) {
         ret->autorelease();
         return ret;
@@ -17,11 +17,11 @@ auto AppendPopup::setup(TextInput* targetInput, bool floatFilter) -> bool {
     this->m_closeBtn->setVisible(false);
     this->m_closeBtn->setEnabled(false);
 
-    auto titleRow = PopupFunctions::createTitleRow("Append Count");
-    auto appendRow = PopupFunctions::createInputRow("Append:", this->appendInput, 100.f, "", floatFilter);
-    auto buttonRow = PopupFunctions::createButtonRow(this, "Cancel", "Append", menu_selector(AppendPopup::cancel), menu_selector(AppendPopup::ok));
+    auto* titleRow = PopupFunctions::createTitleRow("Append Count");
+    auto* appendRow = PopupFunctions::createInputRow("Append:", this->appendInput, 100.f, "", floatFilter);
+    auto* buttonRow = PopupFunctions::createButtonRow(this, "Cancel", "Append", menu_selector(AppendPopup::cancel), menu_selector(AppendPopup::ok));
 
-    auto col = CCNode::create();
+    auto* col = CCNode::create();
     col->setLayout(AxisLayout::create(Axis::Column)
         ->setGap(25.f)
         ->setAxisAlignment(AxisAlignment::Center)

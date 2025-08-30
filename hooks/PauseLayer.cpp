@@ -1,21 +1,20 @@
 #include "PauseLayer.h"
 #include "PauseMenuPopup.h"
+#include "Functions.h"
 
 auto ModifyPauseLayer::onModify(auto& self) -> void {
-	[[maybe_unused]] auto hook = self.setHookPriorityPost("PauseLayer::customSetup", Priority::Late);
+	(void) self.setHookPriorityPost("PauseLayer::customSetup", Priority::Late);
+	Functions::bindHookToSetting(self, "PauseLayer::customSetup", "pause-menu-enabled");
 }
 
 auto ModifyPauseLayer::customSetup() -> void {
 	PauseLayer::customSetup();
 
-	bool pauseEnabled = Mod::get()->getSettingValue<bool>("pause-menu-enabled");
-	if (!pauseEnabled) return;
-
 	// @geode-ignore(unknown-resource)
-	auto buttonSprite = CCSprite::create("logo.png"_spr);
+	auto* buttonSprite = CCSprite::create("logo.png"_spr);
 	buttonSprite->setScale(0.3f);
 
-	auto button = CCMenuItemSpriteExtra::create(
+	auto* button = CCMenuItemSpriteExtra::create(
 		buttonSprite, this, menu_selector(ModifyPauseLayer::buttonPress)
 	);
 
