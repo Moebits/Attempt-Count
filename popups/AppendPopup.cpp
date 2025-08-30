@@ -46,7 +46,7 @@ auto AppendPopup::ok(CCObject* sender) -> void {
     auto targetValue = numFromString<double>(this->targetInput->getString());
 
     if (appendValue && targetValue) {
-        auto newValue = *targetValue + *appendValue;
+        double newValue = *targetValue + *appendValue;
         if (!this->floatFilter) newValue = static_cast<int>(newValue);
         this->targetInput->setString(fmt::format("{}", newValue));
     }

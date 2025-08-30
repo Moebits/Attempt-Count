@@ -20,8 +20,9 @@ auto ModifyPauseLayer::customSetup() -> void {
 	);
 
 	bool rightMenu = Mod::get()->getSettingValue<bool>("right-pause-menu");
-
-	if (auto menu = this->getChildByIDRecursive(rightMenu ? "right-button-menu" : "left-button-menu")) {
+	auto* menu = this->getChildByIDRecursive(rightMenu ? "right-button-menu" : "left-button-menu");
+	
+	if (menu) {
 		menu->addChild(button);
 		menu->updateLayout();
 	}

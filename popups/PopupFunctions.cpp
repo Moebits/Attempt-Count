@@ -6,7 +6,7 @@ auto PopupFunctions::createTitleRow(const gd::string& text, float scale, const c
         ->setAxisAlignment(AxisAlignment::Center)
         ->setCrossAxisAlignment(AxisAlignment::Center));
 
-        auto* label = CCLabelBMFont::create(text.c_str(), font);
+    auto* label = CCLabelBMFont::create(text.c_str(), font);
     label->setScale(scale);
     label->setAnchorPoint({0.5f, 0.5f});
     row->addChild(label);
