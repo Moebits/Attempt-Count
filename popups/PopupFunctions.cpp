@@ -17,7 +17,7 @@ auto PopupFunctions::createTitleRow(const gd::string& text, float scale, const c
     return row;
 }
 
-auto PopupFunctions::createInputRow(const char* text, TextInput*& input, float width, const std::string& value, 
+auto PopupFunctions::createInputRow(const char* text, TextInput*& input, float width, const gd::string& value, 
     bool floatFilter) -> CCNode* {
     auto* row = CCNode::create();
     row->setLayout(AxisLayout::create(Axis::Row)
