@@ -16,7 +16,7 @@ auto ModifyPauseLayer::customSetup() -> void {
 	#if defined(GEODE_DESKTOP)
 		buttonSprite->setScale(0.3f);
 	#elif defined(GEODE_MOBILE)
-		buttonSprite->setScale(0.25f);
+		buttonSprite->setScale(0.2f);
 	#endif
 
 	auto* button = CCMenuItemSpriteExtra::create(
