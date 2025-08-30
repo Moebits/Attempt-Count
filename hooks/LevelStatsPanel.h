@@ -11,7 +11,8 @@ struct ButtonParameters : public CCObject {
     GJGameLevel* level;
     FLAlertLayer* alert;
 
-    ButtonParameters(GJGameLevel* level, FLAlertLayer* alert) : level(level), alert(alert) {
+    ButtonParameters(GJGameLevel* level, FLAlertLayer* alert) 
+        : level(level), alert(alert) {
         this->autorelease();
     }
 };

@@ -7,7 +7,8 @@ struct PlusButtonParameters : public CCObject {
     TextInput* input;
     bool floatFilter;
 
-    PlusButtonParameters(TextInput* input, bool floatFilter) : input(input), floatFilter(floatFilter) {
+    PlusButtonParameters(TextInput* input, bool floatFilter) 
+        : input(input), floatFilter(floatFilter) {
         this->autorelease();
     }
 };
@@ -19,9 +20,9 @@ public:
     static auto createInputRow(const char* text, TextInput*& input, float width, const gd::string& value, 
         bool floatFilter = false) -> CCNode*;
 
-    static auto createInputRowPlus(const char* text, TextInput*& input, float width, const gd::string& value, CCObject* target, 
-        SEL_MenuHandler plusFunc, bool floatFilter = false) -> CCNode*;
+    static auto createInputRowPlus(const char* text, TextInput*& input, float width, const gd::string& value, 
+        CCObject* target, SEL_MenuHandler plusFunc, bool floatFilter = false) -> CCNode*;
 
-    static auto createButtonRow(CCObject* target, const char* cancelLabel, const char* okLabel, SEL_MenuHandler cancelFunc, 
-        SEL_MenuHandler okFunc, float padding = 20.0f) -> CCNode*;  
+    static auto createButtonRow(CCObject* target, const char* cancelLabel, const char* okLabel, 
+        SEL_MenuHandler cancelFunc, SEL_MenuHandler okFunc, float padding = 20.0f) -> CCNode*;  
 };
