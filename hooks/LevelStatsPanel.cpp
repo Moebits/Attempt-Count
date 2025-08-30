@@ -10,7 +10,12 @@ auto SharedStatsPanel::addButton(FLAlertLayer* alert, GJGameLevel* level) -> voi
     if (menu) {
         // @geode-ignore(unknown-resource)
         auto* buttonSprite = CCSprite::create("logo.png"_spr);
-        buttonSprite->setScale(0.4f);
+
+        #if defined(GEODE_DESKTOP)
+            buttonSprite->setScale(0.35f);
+        #elif defined(GEODE_MOBILE)
+            buttonSprite->setScale(0.2f);
+        #endif
 
         auto* button = CCMenuItemSpriteExtra::create(
             buttonSprite, alert, menu_selector(SharedStatsPanel::buttonPress)
