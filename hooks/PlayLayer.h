@@ -1,6 +1,5 @@
 #pragma once
 #include <Geode/Geode.hpp>
-#include <Geode/utils/cocos.hpp>
 #include <Geode/modify/PlayLayer.hpp>
 
 using namespace geode::prelude;
