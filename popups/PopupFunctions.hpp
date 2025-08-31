@@ -46,7 +46,7 @@ public:
         row->addChild(label);
     
         input = TextInput::create(width, "0");
-        input->setFilter(timeFilter ? ".:0123456789" : "0123456789");
+        input->setFilter(timeFilter ? ".:-0123456789" : "-0123456789");
         input->setString(value);
         input->setAnchorPoint({0.f, 0.5f});
         row->addChild(input);
@@ -72,7 +72,7 @@ public:
         row->addChild(label);
     
         input = TextInput::create(width, "0");
-        input->setFilter(timeFilter ? ".:0123456789" : "0123456789");
+        input->setFilter(timeFilter ? ".:-0123456789" : "-0123456789");
         input->setString(value);
         input->setAnchorPoint({0.f, 0.5f});
         row->addChild(input);
