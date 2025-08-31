@@ -26,7 +26,7 @@ struct TimeParseInfo {
 
 class Functions {
 public:
-    static auto formatPlatformerTime(double rawSeconds) -> gd::string {
+    static auto formatPlatformerTime(double rawSeconds) -> std::string {
         int total = static_cast<int>(rawSeconds);
         int hours = total / 3600;
         int minutes = (total / 60) % 60;
@@ -44,7 +44,7 @@ public:
         }
     }
 
-    static auto formatTime(double rawSeconds) -> gd::string {
+    static auto formatTime(double rawSeconds) -> std::string {
         int total = static_cast<int>(std::round(rawSeconds));
         int hours = total / 3600;
         int minutes = (total / 60) % 60;
@@ -109,7 +109,7 @@ public:
         }
     }
 
-    static auto bindHookToSetting(auto& self, const gd::string& hookName, const gd::string& settingName) -> void {
+    static auto bindHookToSetting(auto& self, const std::string& hookName, const std::string& settingName) -> void {
         auto hookRes = self.getHook(hookName);
         if (!hookRes) return;
         auto* hook = static_cast<Hook*>(hookRes.unwrap());

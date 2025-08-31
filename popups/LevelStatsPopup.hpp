@@ -81,7 +81,7 @@ protected:
     
             for (size_t i = 0; i < lines->count(); i++) {
                 auto* label = static_cast<CCLabelBMFont*>(lines->objectAtIndex(i));
-                std::string str = label->getString();
+                auto str = static_cast<std::string>(label->getString());
     
                 if (str.find("Total Attempts") != std::string::npos) {
                     label->setString(fmt::format("Total Attempts: {}", this->level->m_attempts).c_str());

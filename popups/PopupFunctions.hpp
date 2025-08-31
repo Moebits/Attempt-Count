@@ -15,7 +15,7 @@ struct PlusButtonParameters : public CCObject {
 
 class PopupFunctions {
 public:
-    static auto createTitleRow(const gd::string& text, float scale = 0.8f, const char* font = "bigFont.fnt") -> CCNode* {
+    static auto createTitleRow(const std::string& text, float scale = 0.8f, const char* font = "bigFont.fnt") -> CCNode* {
         auto* row = CCNode::create();
         row->setLayout(AxisLayout::create(Axis::Row)
             ->setAxisAlignment(AxisAlignment::Center)
@@ -32,7 +32,7 @@ public:
         return row;
     }
 
-    static auto createInputRow(const char* text, TextInput*& input, float width, const gd::string& value, 
+    static auto createInputRow(const char* text, TextInput*& input, float width, const std::string& value, 
         bool timeFilter = false) -> CCNode* {
         auto* row = CCNode::create();
         row->setLayout(AxisLayout::create(Axis::Row)
@@ -58,7 +58,7 @@ public:
         return row;
     }
 
-    static auto createInputRowPlus(const char* text, TextInput*& input, float width, const gd::string& value, 
+    static auto createInputRowPlus(const char* text, TextInput*& input, float width, const std::string& value, 
         CCObject* target, SEL_MenuHandler plusFunc, bool timeFilter = false) -> CCNode* {
         auto* row = CCNode::create();
         row->setLayout(AxisLayout::create(Axis::Row)

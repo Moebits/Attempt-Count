@@ -120,7 +120,7 @@ public:
     
         if (alert) {
             auto* title = static_cast<CCLabelBMFont*>(alert->getChildByIDRecursive("title"));
-            if (static_cast<gd::string>(title->getString()) != "Level Stats") return;
+            if (static_cast<std::string>(title->getString()) != "Level Stats") return;
     
             int totalPages = this->m_scrollLayer->getTotalPages();
             int page = ((this->m_scrollLayer->m_page % totalPages) + totalPages) % totalPages;
