@@ -14,7 +14,7 @@ auto SharedStatsPanel::addButton(FLAlertLayer* alert, GJGameLevel* level) -> voi
         buttonSprite->setScale(0.65f);
 
         #ifdef GEODE_MOBILE
-            buttonSprite->setScale(0.35f);
+            buttonSprite->setScale(0.3f);
         #endif
 
         auto* button = CCMenuItemSpriteExtra::create(
