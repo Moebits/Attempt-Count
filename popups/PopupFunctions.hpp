@@ -5,10 +5,10 @@ using namespace geode::prelude;
 
 struct PlusButtonParameters : public CCObject {
     TextInput* input;
-    bool floatFilter;
+    bool timeFilter;
 
-    PlusButtonParameters(TextInput* input, bool floatFilter) 
-        : input(input), floatFilter(floatFilter) {
+    PlusButtonParameters(TextInput* input, bool timeFilter) 
+        : input(input), timeFilter(timeFilter) {
         this->autorelease();
     }
 };
@@ -33,7 +33,7 @@ public:
     }
 
     static auto createInputRow(const char* text, TextInput*& input, float width, const gd::string& value, 
-        bool floatFilter = false) -> CCNode* {
+        bool timeFilter = false) -> CCNode* {
         auto* row = CCNode::create();
         row->setLayout(AxisLayout::create(Axis::Row)
             ->setGap(10.f)
@@ -46,7 +46,7 @@ public:
         row->addChild(label);
     
         input = TextInput::create(width, "0");
-        input->setCommonFilter(floatFilter ? CommonFilter::Float : CommonFilter::Int);
+        input->setFilter(timeFilter ? ".:0123456789" : "0123456789");
         input->setString(value);
         input->setAnchorPoint({0.f, 0.5f});
         row->addChild(input);
@@ -59,7 +59,7 @@ public:
     }
 
     static auto createInputRowPlus(const char* text, TextInput*& input, float width, const gd::string& value, 
-        CCObject* target, SEL_MenuHandler plusFunc, bool floatFilter = false) -> CCNode* {
+        CCObject* target, SEL_MenuHandler plusFunc, bool timeFilter = false) -> CCNode* {
         auto* row = CCNode::create();
         row->setLayout(AxisLayout::create(Axis::Row)
             ->setGap(10.f)
@@ -72,13 +72,13 @@ public:
         row->addChild(label);
     
         input = TextInput::create(width, "0");
-        input->setCommonFilter(floatFilter ? CommonFilter::Float : CommonFilter::Int);
+        input->setFilter(timeFilter ? ".:0123456789" : "0123456789");
         input->setString(value);
         input->setAnchorPoint({0.f, 0.5f});
         row->addChild(input);
     
         auto* plusButton = CCMenuItemSpriteExtra::create(ButtonSprite::create("+"), target, plusFunc);
-        plusButton->setUserObject(new PlusButtonParameters(input, floatFilter));
+        plusButton->setUserObject(new PlusButtonParameters(input, timeFilter));
     
         auto* menu = CCMenu::create();
         menu->setLayout(AxisLayout::create(Axis::Row)

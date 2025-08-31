@@ -2,20 +2,21 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PlayLayer.hpp>
 #include "PopupFunctions.hpp"
+#include "Functions.hpp"
 
 using namespace geode::prelude;
 
 class AppendPopup : public Popup<TextInput*, bool> {
 public:
     TextInput* targetInput;
-    bool floatFilter;
+    bool timeFilter;
     TextInput* appendInput;
 
     static constexpr auto popupSize = CCSize{320.f, 200.f};
 
-    static auto create(TextInput* targetInput, bool floatFilter) -> AppendPopup* {
+    static auto create(TextInput* targetInput, bool timeFilter) -> AppendPopup* {
         auto* ret = new AppendPopup();
-        if (ret->initAnchored(popupSize.width, popupSize.height, targetInput, floatFilter)) {
+        if (ret->initAnchored(popupSize.width, popupSize.height, targetInput, timeFilter)) {
             ret->autorelease();
             return ret;
         }
@@ -24,14 +25,14 @@ public:
     }
 
 protected:
-    auto setup(TextInput* targetInput, bool floatFilter) -> bool override {
+    auto setup(TextInput* targetInput, bool timeFilter) -> bool override {
         this->targetInput = targetInput;
-        this->floatFilter = floatFilter;
+        this->timeFilter = timeFilter;
         this->m_closeBtn->setVisible(false);
         this->m_closeBtn->setEnabled(false);
     
         auto* titleRow = PopupFunctions::createTitleRow("Append Count");
-        auto* appendRow = PopupFunctions::createInputRow("Append:", this->appendInput, 100.f, "", floatFilter);
+        auto* appendRow = PopupFunctions::createInputRow("Append:", this->appendInput, 100.f, "", timeFilter);
         auto* buttonRow = PopupFunctions::createButtonRow(this, "Cancel", "Append", menu_selector(AppendPopup::cancel), menu_selector(AppendPopup::ok));
     
         auto* col = CCNode::create();
@@ -55,15 +56,45 @@ protected:
     }
 
     auto ok(CCObject* sender) -> void {
-        auto appendValue = numFromString<double>(this->appendInput->getString());
-        auto targetValue = numFromString<double>(this->targetInput->getString());
-    
-        if (appendValue && targetValue) {
-            double newValue = *targetValue + *appendValue;
-            if (!this->floatFilter) newValue = static_cast<int>(newValue);
-            this->targetInput->setString(fmt::format("{}", newValue));
+        auto appendStr = this->appendInput->getString();
+        auto targetStr = this->targetInput->getString();
+
+        auto appendTime = Functions::parseTime(appendStr);
+        auto targetTime = Functions::parseTime(targetStr);
+
+        if (targetTime) {
+            auto [targetSeconds, targetInfo] = *targetTime;
+
+            double newTotal = targetSeconds;
+            auto info = targetInfo;
+
+            if (appendTime) {
+                auto [appendSeconds, appendInfo] = *appendTime;
+                newTotal += appendSeconds;
+                info |= appendInfo;
+            } else {
+                auto appendValue = numFromString<double>(appendStr);
+                if (appendValue) newTotal += *appendValue;
+            }
+
+            this->targetInput->setString(Functions::formatTimeConditional(newTotal, info));
+        } else {
+            auto appendValue = numFromString<double>(appendStr);
+            auto targetValue = numFromString<double>(targetStr);
+        
+            if (targetValue) {
+                double newValue = *targetValue;
+                if (appendTime) {
+                    auto [appendSeconds, appendInfo] = *appendTime;
+                    newValue += appendSeconds;
+                } else {
+                    if (appendValue) newValue += *appendValue;
+                }
+                if (!this->timeFilter) newValue = static_cast<int>(newValue);
+                this->targetInput->setString(fmt::format("{}", newValue));
+            }
         }
-    
+
         this->onClose(nullptr);
     }
 

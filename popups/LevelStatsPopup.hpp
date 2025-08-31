@@ -100,6 +100,6 @@ protected:
     auto plusMenu(CCObject* sender) -> void {
         auto* button = static_cast<CCMenuItemSpriteExtra*>(sender);
         auto* params = static_cast<PlusButtonParameters*>(button->getUserObject());
-        AppendPopup::create(params->input, params->floatFilter)->show();
+        AppendPopup::create(params->input, params->timeFilter)->show();
     }
 };

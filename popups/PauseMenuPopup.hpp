@@ -32,6 +32,8 @@ protected:
         int attempts = playLayer->m_attempts;
         int jumps = playLayer->m_jumps;
         double time = playLayer->m_isPlatformer ? playLayer->m_timePlayed : playLayer->m_fields->levelTime;
+        auto timeInfo = Functions::parseDoubleTime(time);
+        auto timeStr = Functions::formatTimeConditional(time, timeInfo);
     
         this->m_closeBtn->setVisible(false);
         this->m_closeBtn->setEnabled(false);
@@ -39,7 +41,7 @@ protected:
         auto* titleRow = PopupFunctions::createTitleRow("Edit Attempt Count");
         auto* attemptsRow = PopupFunctions::createInputRowPlus("Attempt:", this->attemptInput, 100.f, fmt::format("{}", attempts), this, menu_selector(PauseMenuPopup::plusMenu));
         auto* jumpsRow = PopupFunctions::createInputRowPlus("Jumps:", this->jumpInput, 100.f, fmt::format("{}", jumps), this, menu_selector(PauseMenuPopup::plusMenu));
-        auto* timeRow = PopupFunctions::createInputRowPlus("Time:", this->timeInput, 100.f, fmt::format("{}", static_cast<int>(time)), this, menu_selector(PauseMenuPopup::plusMenu), true);
+        auto* timeRow = PopupFunctions::createInputRowPlus("Time:", this->timeInput, 100.f, timeStr, this, menu_selector(PauseMenuPopup::plusMenu), true);
         auto* buttonRow = PopupFunctions::createButtonRow(this, "Cancel", "Edit", menu_selector(PauseMenuPopup::cancel), menu_selector(PauseMenuPopup::ok));
         
         auto* col = CCNode::create();
@@ -67,9 +69,20 @@ protected:
     auto ok(CCObject* sender) -> void {
         auto newAttempts = numFromString<int>(this->attemptInput->getString());
         auto newJumps = numFromString<int>(this->jumpInput->getString());
-        auto newTime  = numFromString<double>(this->timeInput->getString());
+        
+        double newTime = 0;
+        auto timeStr = this->timeInput->getString();
+
+        auto parsedTime = Functions::parseTime(timeStr);
+        if (parsedTime) {
+            auto [seconds, info] = *parsedTime;
+            newTime = seconds;
+        } else {
+            auto newTimeRes = numFromString<double>(timeStr);
+            if (newTimeRes) newTime = *newTimeRes;
+        }
     
-        if (newAttempts && newJumps && newTime) {
+        if (newAttempts && newJumps) {
             auto* playLayer = static_cast<ModifyPlayLayer*>(PlayLayer::get());
             if (playLayer) {
                 int oldAttempts = playLayer->m_attempts;
@@ -80,9 +93,9 @@ protected:
                 playLayer->m_attempts = *newAttempts;
                 playLayer->m_jumps = *newJumps;
                 if (playLayer->m_isPlatformer) {
-                    playLayer->m_timePlayed = *newTime;
+                    playLayer->m_timePlayed = newTime;
                 } else {
-                    playLayer->m_fields->levelTime = *newTime;
+                    playLayer->m_fields->levelTime = newTime;
                 }
     
                 if (playLayer->m_level) {
@@ -101,7 +114,7 @@ protected:
                     auto* pauseLayer = typeinfo_cast<PauseLayer*>(CCDirector::get()->getRunningScene()->getChildByID("PauseLayer"));
                     if (pauseLayer) {
                         auto* playTimeLabel = static_cast<CCLabelBMFont*>(pauseLayer->getChildByIDRecursive("play-time"));
-                        playTimeLabel->setString(Functions::formatSeconds(playLayer->m_timePlayed).c_str());
+                        playTimeLabel->setString(Functions::formatPlatformerTime(playLayer->m_timePlayed).c_str());
                     }
                 }
             }
@@ -116,6 +129,6 @@ protected:
     auto plusMenu(CCObject* sender) -> void {
         auto* button = static_cast<CCMenuItemSpriteExtra*>(sender);
         auto* params = static_cast<PlusButtonParameters*>(button->getUserObject());
-        AppendPopup::create(params->input, params->floatFilter)->show();
+        AppendPopup::create(params->input, params->timeFilter)->show();
     }
 };
