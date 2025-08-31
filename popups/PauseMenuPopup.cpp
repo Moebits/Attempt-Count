@@ -82,7 +82,7 @@ auto PauseMenuPopup::ok(CCObject* sender) -> void {
             }
 
             if (playLayer->m_attemptLabel) {
-                playLayer->m_attemptLabel->setString(fmt::format("Attempts: {}", *newAttempts).c_str());
+                playLayer->m_attemptLabel->setString(fmt::format("Attempt {}", *newAttempts).c_str());
             }
 
             if (playLayer->m_isPlatformer) {
