@@ -13,9 +13,9 @@ auto ModifyPauseLayer::customSetup() -> void {
 	// @geode-ignore(unknown-resource)
 	auto* buttonSprite = CCSprite::create("logo.png"_spr);
 
-	#if defined(GEODE_DESKTOP)
-		buttonSprite->setScale(0.5f);
-	#elif defined(GEODE_MOBILE)
+	buttonSprite->setScale(0.5f);
+
+	#ifdef GEODE_MOBILE
 		buttonSprite->setScale(0.3f);
 	#endif
 

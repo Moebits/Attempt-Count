@@ -11,9 +11,9 @@ auto SharedStatsPanel::addButton(FLAlertLayer* alert, GJGameLevel* level) -> voi
         // @geode-ignore(unknown-resource)
         auto* buttonSprite = CCSprite::create("logo.png"_spr);
 
-        #if defined(GEODE_DESKTOP)
-            buttonSprite->setScale(0.65f);
-        #elif defined(GEODE_MOBILE)
+        buttonSprite->setScale(0.65f);
+
+        #ifdef GEODE_MOBILE
             buttonSprite->setScale(0.35f);
         #endif
 
