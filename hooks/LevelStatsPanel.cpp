@@ -30,10 +30,7 @@ public:
             auto* buttonSprite = CCSprite::create("logo.png"_spr);
     
             buttonSprite->setScale(0.65f);
-    
-            #ifdef GEODE_IS_MOBILE
-                buttonSprite->setScale(0.3f);
-            #endif
+            GEODE_MOBILE(buttonSprite->setScale(0.3f))
     
             auto* button = CCMenuItemSpriteExtra::create(
                 buttonSprite, alert, menu_selector(SharedStatsPanel::buttonPress)
