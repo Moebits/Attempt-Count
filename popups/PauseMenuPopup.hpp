@@ -111,7 +111,7 @@ protected:
                 }
     
                 if (playLayer->m_isPlatformer) {
-                    auto* pauseLayer = typeinfo_cast<PauseLayer*>(CCDirector::get()->getRunningScene()->getChildByID("PauseLayer"));
+                    auto* pauseLayer = static_cast<PauseLayer*>(CCDirector::get()->getRunningScene()->getChildByID("PauseLayer"));
                     if (pauseLayer) {
                         auto* playTimeLabel = static_cast<CCLabelBMFont*>(pauseLayer->getChildByIDRecursive("play-time"));
                         playTimeLabel->setString(Functions::formatPlatformerTime(playLayer->m_timePlayed).c_str());

@@ -8,10 +8,13 @@
 	},
 	"id": "moebits.attempt-count",
 	"name": "Attempt Count",
-	"version": "v0.0.2",
+	"version": "v0.0.3",
 	"developer": "Moebits",
 	"description": "Edit level attempt counts",
 	"tags": ["offline", "customization"],
+	"dependencies": {
+		"geode.node-ids": ">=1.21.1"
+	},
 	"links": {
 		"source": "https://github.com/Moebits/Attempt-Count"
 	},

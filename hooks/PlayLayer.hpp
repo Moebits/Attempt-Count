@@ -1,7 +1,5 @@
-#pragma once
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PlayLayer.hpp>
-#include "Functions.hpp"
 
 using namespace geode::prelude;
 
@@ -22,8 +20,9 @@ public:
         this->m_fields->levelTime += dt;
     }
 
+    /*
     auto updateEndTime(float dt) -> void {
-        auto* endLayer = typeinfo_cast<EndLevelLayer*>(this->getChildByIDRecursive("EndLevelLayer"));
+        auto* endLayer = static_cast<EndLevelLayer*>(this->getChildByIDRecursive("EndLevelLayer"));
         if (endLayer) {
             auto* timeLabel = static_cast<CCLabelBMFont*>(endLayer->getChildByIDRecursive("time-label"));
             timeLabel->setString(fmt::format("Time: {}", Functions::formatTime(this->m_fields->levelTime)).c_str());
@@ -34,7 +33,7 @@ public:
     auto levelComplete() -> void {
         PlayLayer::levelComplete();
         this->schedule(schedule_selector(ModifyPlayLayer::updateEndTime));
-    }
+    }*/
 
     auto fullReset() -> void {
         PlayLayer::fullReset();
