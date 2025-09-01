@@ -12,7 +12,7 @@ endif()
 
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
-project(AttemptCount VERSION 0.0.1)
+project(AttemptCount VERSION 0.0.2)
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS hooks/*.cpp popups/*.cpp structures/*.cpp)
 

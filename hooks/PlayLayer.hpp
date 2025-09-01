@@ -45,4 +45,13 @@ public:
         PlayLayer::onQuit();
         this->m_fields->levelTime = 0;
     }
+
+    auto setupHasCompleted() -> void {
+        PlayLayer::setupHasCompleted();
+
+		bool hideStartposLabel = Mod::get()->getSettingValue<bool>("hide-startpos-label");
+        if (hideStartposLabel) {
+            if (this->m_startPosObject) this->m_attemptLabel->setScale(0.f);
+        }
+    }
 };

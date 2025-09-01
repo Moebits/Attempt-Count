@@ -8,7 +8,7 @@
 	},
 	"id": "moebits.attempt-count",
 	"name": "Attempt Count",
-	"version": "v0.0.1",
+	"version": "v0.0.2",
 	"developer": "Moebits",
 	"description": "Edit level attempt counts",
 	"tags": ["offline", "customization"],
@@ -40,6 +40,11 @@
 		"left-stats-menu": {
 			"type": "bool",
 			"name": "Left Stats Menu",
+			"default": false
+		},
+		"hide-startpos-label": {
+			"type": "bool",
+			"name": "Hide Startpos Attempt Label",
 			"default": false
 		}
 	}
