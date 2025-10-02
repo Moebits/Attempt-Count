@@ -72,7 +72,17 @@ auto myClass = new MyClass{};
 auto* myClass = new MyClass{};
 ```
 
-**7. Use brace initialization for classes, else copy initialization** 
+**7. Use smart pointers when possible** \
+Avoid raw pointers, unless you are being limited by a library.
+
+```cpp
+// x Bad
+auto* myClass = new MyClass{};
+// ✓ Good
+auto myClass = std::make_unique<MyClass>();
+```
+
+**8. Use brace initialization for classes, else copy initialization** 
 
 ```cpp
 // x Bad
@@ -82,7 +92,7 @@ int x = 5;
 auto myClass = MyClass{5, 4};
 ```
 
-**8. Pointers and reference are part of the type** 
+**9. Pointers and reference are part of the type** 
 
 ```cpp
 // x Bad
@@ -91,7 +101,7 @@ auto method(const std::string &str, float *ptr) -> void {}
 auto method(const std::string& str, float* ptr) -> void {}
 ```
 
-**9. Prefer auto function parameters, unless the template is actually needed in the function body** 
+**10. Prefer auto function parameters, unless the template is needed in the function body** 
 
 ```cpp
 // x Bad
@@ -101,7 +111,7 @@ auto bind(F&& func, const std::string& name) -> void {}
 auto bind(auto&& func, const std::string& name) -> void {}
 ```
 
-**10. Preface class member variables with this** 
+**11. Preface class member variables with this** 
 
 ```cpp
 // x Bad
@@ -110,8 +120,8 @@ doSomething();
 this->doSomething();
 ```
 
-**11. Use static_cast and dynamic_cast over C casts** \
-Also avoid using reinterpret_cast unless it is necessary.
+**12. Use static_cast and dynamic_cast over C casts** \
+Also avoid using reinterpret_cast unless necessary.
 
 ```cpp
 // x Bad
@@ -120,7 +130,7 @@ int x = (int) 5.3;
 int x = static_cast<int>(5.3);
 ```
 
-**12. Use post increment in for loops** \
+**13. Use post increment in for loops** \
 There shouldn't be a difference anymore, and post increment looks better.
 
 ```cpp
@@ -130,7 +140,7 @@ for (int i = 0; i < 5; ++i) {}
 for (int i = 0; i < 5; i++) {}
 ```
 
-**13. Use the member initialization list** 
+**14. Use the member initialization list** 
 
 ```cpp
 // x Bad
